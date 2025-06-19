@@ -138,3 +138,28 @@ function show_log() {
 }
 
 function main_menu() {
+    check_docker
+    build_image
+
+    while true; do
+        clear
+        echo "========== Nexus 多节点管理 =========="
+        echo "1. 安装并启动新节点"
+        echo "2. 显示某节点的 node-id"
+        echo "3. 卸载某个节点"
+        echo "4. 查看节点日志"
+        echo "5. 退出"
+        echo "======================================"
+        read -rp "请输入选项(1-5): " choice
+        case "$choice" in
+            1) run_container; read -p "按任意键返回菜单" ;;
+            2) show_node_id; read -p "按任意键返回菜单" ;;
+            3) uninstall_node; read -p "按任意键返回菜单" ;;
+            4) show_log; read -p "按任意键返回菜单" ;;
+            5) exit 0 ;;
+            *) echo "无效选项"; read -p "按任意键返回菜单" ;;
+        esac
+    done
+}
+
+main_menu
